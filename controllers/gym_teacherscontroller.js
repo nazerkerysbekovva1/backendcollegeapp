@@ -5,7 +5,7 @@ const response = require('../response');
 
 // Get all gym_teachers
 exports.getAllGymTeachers = (req, res) => {
-    const sql = "SELECT * FROM `gym_teachers`";
+    const sql = "SELECT * FROM `gum_teachers`";
     db.query(sql, (error, rows) => {
         if (error) {
             console.error(error);
@@ -18,7 +18,7 @@ exports.getAllGymTeachers = (req, res) => {
 // Get teacher by ID
 exports.getGymTeacherById = (req, res) => {
     const id = req.params.id;
-    const sql = "SELECT * FROM `gym_teachers` WHERE `id` = ?";
+    const sql = "SELECT * FROM `gum_teachers` WHERE `id` = ?";
     db.query(sql, [id], (error, rows) => {
         if (error) return response.status({ error: 'Database error' }, res);
         if (rows.length === 0) return response.status({ error: 'Teacher not found' }, res);
@@ -29,7 +29,7 @@ exports.getGymTeacherById = (req, res) => {
 // Add new teacher
 exports.addGymTeacher = (req, res) => {
     const { teacher_name, position, email, facebook, instagram, achievements } = req.body;
-    const sql = "INSERT INTO `gym_teachers` (`teacher_name`, `position`, `email`, `facebook`, `instagram`, `achievements`) VALUES (?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO `gum_teachers` (`teacher_name`, `position`, `email`, `facebook`, `instagram`, `achievements`) VALUES (?, ?, ?, ?, ?, ?)";
     db.query(sql, [teacher_name, position, email, facebook, instagram, achievements], (error, result) => {
         if (error) return response.status({ error: 'Database error' }, res);
         response.status({ message: 'Added successfully', id: result.insertId }, res);
@@ -40,7 +40,7 @@ exports.addGymTeacher = (req, res) => {
 exports.updateGymTeacher = (req, res) => {
     const id = req.params.id;
     const { teacher_name, position, email, facebook, instagram, achievements } = req.body;
-    const sql = "UPDATE `gym_teachers` SET `teacher_name` = ?, `position` = ?, `email` = ?, `facebook` = ?, `instagram` = ?, `achievements` = ? WHERE `id` = ?";
+    const sql = "UPDATE `gum_teachers` SET `teacher_name` = ?, `position` = ?, `email` = ?, `facebook` = ?, `instagram` = ?, `achievements` = ? WHERE `id` = ?";
     db.query(sql, [teacher_name, position, email, facebook, instagram, achievements, id], (error, result) => {
         if (error) return response.status({ error: 'Database error' }, res);
         if (result.affectedRows === 0) return response.status({ error: 'Teacher not found' }, res);
@@ -51,7 +51,7 @@ exports.updateGymTeacher = (req, res) => {
 // Delete teacher
 exports.deleteGymTeacher = (req, res) => {
     const id = req.params.id;
-    const sql = "DELETE FROM `gym_teachers` WHERE `id` = ?";
+    const sql = "DELETE FROM `gum_teachers` WHERE `id` = ?";
     db.query(sql, [id], (error, result) => {
         if (error) return response.status({ error: 'Database error' }, res);
         if (result.affectedRows === 0) return response.status({ error: 'Teacher not found' }, res);

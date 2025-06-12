@@ -16,7 +16,7 @@ const teacherController = require('../controllers/teacherController');
 const agrTeacherController = require('../controllers/agr_teacherscontroller');
 const etbTeacherController = require('../controllers/etb_teacherscontroller');
 const gymTeacherController = require('../controllers/gym_teacherscontroller');
-
+const aiController = require('../controllers/aiController');
 // Define routes
 router.route('/').get(indexController.index);
 
@@ -81,6 +81,7 @@ router.post('/gym_teachers', gymTeacherController.addGymTeacher);
 router.put('/gym_teachers/:id', gymTeacherController.updateGymTeacher);
 router.delete('/gym_teachers/:id', gymTeacherController.deleteGymTeacher);
 
-
+// AI timetable
+router.post('/ask', aiController.askAI);
 
 module.exports = router;
